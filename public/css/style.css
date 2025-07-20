@@ -28,35 +28,54 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
-.left-image {
+.right-image {
     flex: 1;
     margin-right: 20px;
+    
+}
+.right-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
 }
 
-.right-info {
+.left-info {
     flex: 2;
     display: flex;
+    font-size: 2em;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
 }
 
-header {
-    
-    text-align: right;
-    position: relative;
-}   
+
 header nav{
-    
+    text-align: right;
     padding: 10px 0 10px 0;
     position: relative;
     width: 100%;
 }
-nav a {
-   
-    padding: 10px 20px;
-    display: inline-block;
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
+.nav-left .brand-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fdfdfd;
+    padding-left: 20px;
+}
+
+.nav-right a {
+    padding: 10px 20px;
+    display: inline-block;
+    color: #fdfdfd;
+    text-decoration: none;
+}
 
 
 #typing-text::after {
@@ -67,6 +86,7 @@ nav a {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
 }
+
 footer p {
    text-align: center;
     padding: 20px 0;
