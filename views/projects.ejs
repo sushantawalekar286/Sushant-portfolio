@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+<section>
+  <h2>My Projects</h2>
+  <ul>
+    <% for(let p of projects) { %>
+      <li>
+        <strong><%= p.title %></strong> — <%= p.tech %>
+        [<a href="<%= p.link %>">GitHub</a>]
+      </li>
+    <% } %>
+  </ul>
+</section>
+<%- include('partials/footer') %>
