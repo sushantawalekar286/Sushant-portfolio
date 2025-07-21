@@ -34,25 +34,31 @@ body {
     
 }
 .right-image img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 500px;
     border-radius: 10px;
 }
 
 .left-info {
     flex: 2;
     display: flex;
-    font-size: 2em;
+    font-size: 1.5em;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    
+}
+.left-info h1 {
+    font-size: 2.0em;
+    margin-bottom: 20px;
+   font-family: 'Courier New', Courier, monospace;
 }
 
 
 header nav{
     text-align: right;
     padding: 10px 0 10px 0;
-    position: relative;
+    position: fixed;
     width: 100%;
 }
 
@@ -77,6 +83,11 @@ header nav{
     text-decoration: none;
 }
 
+.left-info h6 {
+    font-size: 0.7em;
+    margin-bottom: 10px;
+    text-align:center ;
+}
 
 #typing-text::after {
   content: "|";
@@ -87,14 +98,45 @@ header nav{
   51%, 100% { opacity: 0; }
 }
 
+footer {
+    background-color: #1a237e;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+footer .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 footer p {
    text-align: center;
     padding: 20px 0;
 
     color: white;
-    position: fixed;
+    position:relative;
     left: 0;
     bottom: 0;
     width: 100%;
     margin: 0;
+}
+
+.contact-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.contact-container button {
+    padding: 10px 20px;
+    background-color: #3949ab;
+    color: #fdfdfd;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 20px;
 }
