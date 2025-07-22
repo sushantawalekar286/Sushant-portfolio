@@ -8,6 +8,10 @@
     text-decoration: none;
     transition: all 0.3s ease;
 }
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
     height: 100%;
 }
@@ -127,7 +131,7 @@ footer p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    
 }
 
 .contact-container button {
@@ -140,3 +144,226 @@ footer p {
     font-size: 1.2em;
     margin-top: 20px;
 }
+
+.contact{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.contact h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #fdfdfd;
+}
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #fdfdfd;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    
+    width:25%;
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+button{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fdfdfd;
+}
+
+.section-card {
+  background: #232b5c;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(26,35,126,0.35);
+  color: #fdfdfd;
+  padding: 32px 24px;
+  margin: 40px auto 40px auto;
+  max-width: 900px;
+}  
+
+/* About Section Styles */
+.about-container {
+    max-width: 950px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    padding: 32px 24px;
+}
+
+.about-info {
+    text-align: left;
+    color: #fdfdfd;
+    font-size: 1.15em;
+    line-height: 1.7;
+}
+
+.about-info h2 {
+    font-size: 2.2em;
+    margin-bottom: 18px;
+    color: #ffd600;
+    text-align: left;
+}
+
+.about-info p {
+    margin-bottom: 18px;
+}
+
+.about-info ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 18px;
+}
+
+.about-info ul li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    position: relative;
+    padding-left: 28px;
+}
+
+.about-info ul li::before {
+    content: "🏅";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.1em;
+}
+
+
+/* Tech Stack Section */
+.tech-stack-section {
+  background: #232b5c; /* deep blue, matches your bg */
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(26,35,126,0.35); /* #1a237e shadow */
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 32px 24px;
+  color: #fdfdfd;
+}
+
+.tech-stack-title {
+  text-align: center;
+  font-size: 2.2em;
+  font-weight: bold;
+  margin-bottom: 0.2em;
+  letter-spacing: 1px;
+  color: #ffd600;
+}
+
+.tech-stack-underline {
+  width: 120px;
+  height: 5px;
+  background: #5c6bc0; /* lighter blue accent */
+  margin: 0 auto 32px auto;
+  border-radius: 3px;
+}
+
+.tech-stack-container {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.tech-stack-categories {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.tech-cat-btn {
+  background: none;
+  border: none;
+  color: #5c6bc0; /* blue accent */
+  font-size: 1em;
+  text-align: left;
+  padding: 14px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tech-cat-btn.active,
+.tech-cat-btn:hover {
+  background: #5c6bc0;
+  color: #fff;
+}
+
+.tech-stack-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 200px;
+}
+
+.tech-cat-content {
+  display: none;
+  flex-wrap: wrap;
+  gap: 16px;
+  animation: fadeIn 0.3s;
+}
+
+.tech-cat-content span {
+  display: inline-block;
+  background: #3949ab; /* mid blue */
+  color: #ffd600;      /* yellow text */
+  padding: 10px 22px;
+  border-radius: 22px;
+  margin: 8px 12px 8px 0;
+  font-size: 1em;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(26,35,126,0.18);
+}
+
+.tech-stack-btn-row {
+  text-align: center;
+  margin-top: 32px;
+}
+
+.tech-stack-view-btn {
+  background: #ffd600;
+  color: #232b5c;
+  font-size: 1.2em;
+  font-weight: 600;
+  padding: 16px 38px;
+  border-radius: 32px;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 16px rgba(26,35,126,0.15);
+  transition: background 0.2s, color 0.2s;
+}
+
+.tech-stack-view-btn:hover {
+  background: #5c6bc0;
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+
+
+
+
+
