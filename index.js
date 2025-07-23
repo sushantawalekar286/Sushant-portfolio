@@ -15,21 +15,15 @@ mongoose.connect("mongodb://127.0.0.1:27017/portfolioDB")
 
 
 // Routes
+
+
 app.get('/', (req, res) => {
   const projects = [
-    { title: "InstaClone", tech: "Node, EJS, MongoDB", link: "https://github.com/..." },
-    { title: "Weather App", tech: "Node, API, Bootstrap", link: "https://github.com/..." }
+    { title: "Math Solver", tech: "Python", link: "https://github.com/yourname/mathsolver" },
+    { title: "Portfolio", tech: "Node.js, EJS", link: "https://github.com/yourname/portfolio" }
+    // ...add more projects
   ];
-  res.render('home',{ projects });
-});
-
-app.get('/about', (req, res) => {
-  res.render('about');
-});
-
-app.get('/projects', (req, res) => {
-  
-  res.render('projects');
+  res.render('home', { projects });
 });
 
 
