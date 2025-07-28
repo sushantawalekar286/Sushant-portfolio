@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<div class="tech-stack-full">
+  <h2 class="tech-stack-title">
+    <span style="font-size:1.2em;">🚀</span> My Tech Stack
+  </h2>
+  <div class="tech-stack-underline"></div>
+
+  <% for(let cat of techstack) { %>
+    <h3 class="tech-stack-category">
+      <span style="font-size:1.2em;"><%= cat.icon %></span>
+      <span style="color:#ffd600;"><%= cat.category %></span>
+    </h3>
+    <div class="tech-stack-row">
+      <% for(let item of cat.items) { %>
+        <div class="tech-stack-item">
+          <img src="<%= item.icon %>" alt="<%= item.name %>" />
+          <span><%= item.name %></span>
+        </div>
+      <% } %>
+    </div>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

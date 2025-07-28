@@ -17,17 +17,19 @@
 
 
 <div class="contact-container">
-  <h2>Connect with me</h2>
-  
-  <form method="get" action="/contact">
-    <button>Get In Touch</button>
-  </form>
-  <form method="get" action="/resume">
-    <button>View My Resume</button>
-  </form>
-  <p>Feel free to reach out for collaborations, projects, or just a chat!</p>
+  <h2><i class="fas fa-paper-plane"></i> Connect with me</h2>
+  <p class="contact-subtitle">Feel free to reach out for collaborations, projects, or just a chat!</p>
+  <div class="contact-btn-row">
+    <a href="/contact" class="contact-btn">
+      <i class="fas fa-envelope"></i> Get In Touch
+    </a>
+    <a href="/resume" class="contact-btn">
+      <i class="fas fa-file-alt"></i> View My Resume
+    </a>
+  </div>
 </div>
 </section>
+
 <section id="about">
   <%- include('about') %>
 </section>

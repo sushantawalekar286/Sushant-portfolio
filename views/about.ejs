@@ -1,7 +1,7 @@
 <br /><br /><br />
 <section>
   <div class="about-container">
-    <h2>About Me</h2>
+
     <div class="about-info">
      <section id="about" style="padding: 2rem; max-width: 1000px; margin: auto;">
   <h2>👋 About Me</h2>
@@ -27,20 +27,31 @@
 <section id="awards" class="section-card">
   <h2>🏆 Awards & Achievements</h2>
   <ul>
-    <li> 1st Prize – Project Presentation (Jidnyasa, TKIET)</li>
-    <li> 2nd Prize – Paper Presentation (Ureka, TKIET)</li>
-    <li> 3rd Prize – Digitech (NIT Kolhapur)</li>
-    <li> 3rd Prize – CodeDusk (MCA Dept, TKIET)</li>
-  </ul>
+  <% for(let a of awards) { %>
+    <li><%= a %></li>
+  <% } %>
+</ul>
+  <div class="tech-stack-btn-row">
+    <a href="/full-achievement" class="tech-stack-view-btn">
+      <i class="fas fa-search"></i> View Full achievements
+    </a>
 </section>
 
 <section id="projects"  class="section-card">
   <h2>🧠 Projects</h2>
-  <p><strong>Math Problem Solver (Python)</strong></p>
-  <p>
-    A basic math solver that provides step-by-step solutions using Python. It’s designed to help students understand calculation logic.
-    The current version handles only simple problems, but it's a solid representation of my problem-solving and development skills.
-  </p>
+ <ul>
+  <% for(let p of projects) { %>
+    <li>
+      <strong><%= p.title %></strong> — <%= p.tech %>
+      [<a href="<%= p.link %>">GitHub</a>]
+    </li>
+  <% } %>
+</ul>
+
+  <div class="tech-stack-btn-row">
+    <a href="/full-projects" class="tech-stack-view-btn">
+      <i class="fas fa-search"></i> View Full projects
+    </a>
 </section>
 
 <section id="connect" style="padding: 2rem; max-width: 900px; margin: auto;">
