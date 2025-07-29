@@ -1,68 +1,28 @@
-<br /><br /><br />
-<section>
-  <div class="about-container">
 
-    <div class="about-info">
-     <section id="about" style="padding: 2rem; max-width: 1000px; margin: auto;">
-  <h2>👋 About Me</h2>
-  <p>
-    I'm <strong>Sushant Bhairu Awalekar</strong>, a B.Tech Computer Science student at <strong>TKIET Warananagar</strong>.
-    After scoring 56% in my 12th, I committed myself to growth, learning, and skill development. I’ve built a strong foundation
-    in programming, full-stack development, and problem-solving through self-driven projects and continuous learning.
-  </p>
-  <p>
-    I'm deeply passionate about <strong>AI, web development, and digital transformation</strong>. I enjoy building tech that makes a real difference.
-    My goal is to become a skilled <strong>Full-Stack Developer</strong> who contributes to meaningful, inclusive, and innovative digital solutions.
-  </p>
-  <p>
-    I’m always exploring new technologies, seeking opportunities to grow, and working on projects that challenge my thinking. Whether it’s
-    developing apps, solving problems, or learning new frameworks, I’m constantly pushing myself forward.
-  </p>
-</section>
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="header-content">
+        <i class="fas fa-user about-icon"></i>
+        <h2>About Me</h2>
+      </div>
+      <div class="header-underline"></div>
+    </div>
 
-<section id="techstack" style="padding: 2rem; max-width: 900px; margin: auto;">
-  <%-include('techstack') %>
-</section>
-
-<section id="awards" class="section-card">
-  <h2>🏆 Awards & Achievements</h2>
-  <ul>
-  <% for(let a of awards) { %>
-    <li><%= a %></li>
-  <% } %>
-</ul>
-  <div class="tech-stack-btn-row">
-    <a href="/full-achievement" class="tech-stack-view-btn">
-      <i class="fas fa-search"></i> View Full achievements
-    </a>
-</section>
-
-<section id="projects"  class="section-card">
-  <h2>🧠 Projects</h2>
- <ul>
-  <% for(let p of projects) { %>
-    <li>
-      <strong><%= p.title %></strong> — <%= p.tech %>
-      [<a href="<%= p.link %>">GitHub</a>]
-    </li>
-  <% } %>
-</ul>
-
-  <div class="tech-stack-btn-row">
-    <a href="/full-projects" class="tech-stack-view-btn">
-      <i class="fas fa-search"></i> View Full projects
-    </a>
-</section>
-
-<section id="connect" style="padding: 2rem; max-width: 900px; margin: auto;">
-  <h2>🤝 Let’s Connect</h2>
-  <p>
-    Whether it’s collaboration, building innovative tools, or discussing tech ideas, I’m always open to learning and growing with
-    like-minded creators.
-  </p>
-  <p><strong>“Let’s build the future, one line of code at a time.”</strong> 🚀</p>
-</section>
-
+    <div class="about-content">
+      <p>
+        I'm <strong>Sushant Bhairu Awalekar</strong>, a B.Tech Computer Science student at <strong>TKIET Warananagar</strong>.
+        After scoring 56% in my 12th, I committed myself to growth, learning, and skill development. I've built a strong foundation
+        in programming, full-stack development, and problem-solving through self-driven projects and continuous learning.
+      </p>
+      <p>
+        I'm deeply passionate about <strong>AI, web development, and digital transformation</strong>. I enjoy building tech that makes a real difference.
+        My goal is to become a skilled <strong>Full-Stack Developer</strong> who contributes to meaningful, inclusive, and innovative digital solutions.
+      </p>
+      <p>
+        I'm always exploring new technologies, seeking opportunities to grow, and working on projects that challenge my thinking. Whether it's
+        developing apps, solving problems, or learning new frameworks, I'm constantly pushing myself forward.
+      </p>
     </div>
   </div>
 </section>

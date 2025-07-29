@@ -34,5 +34,206 @@
   <%- include('about') %>
 </section>
 
+<section id="techstack" class="techstack-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="header-content">
+        <i class="fas fa-cogs techstack-icon"></i>
+        <h2>Tech Stack</h2>
+      </div>
+      <div class="header-underline"></div>
+    </div>
+
+    <div class="techstack-content">
+      <%- include('techstack') %>
+    </div>
+  </div>
+</section>
+
+<section id="awards" class="awards-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="header-content">
+        <i class="fas fa-trophy trophy-icon"></i>
+        <h2>Awards & Certifications</h2>
+      </div>
+      <div class="header-underline"></div>
+    </div>
+
+    <div class="awards-grid">
+      <% awards.forEach(award => { %>
+        <div class="award-card">
+          <div class="award-image">
+            <% if (award.image && award.image !== '/images/default-award.jpg') { %>
+              <img src="<%= award.image %>" alt="<%= award.title %>" onerror="this.parentElement.innerHTML='<div class=\'placeholder-image\'><i class=\'fas fa-trophy\'></i><p>Award Image</p></div>'">
+            <% } else { %>
+              <div class="placeholder-image">
+                <i class="fas fa-trophy"></i>
+                <p>Award Image</p>
+              </div>
+            <% } %>
+          </div>
+          <div class="award-content">
+            <h3 class="award-title"><%= award.title %></h3>
+            <p class="award-event"><%= award.event %></p>
+            <p class="award-description"><%= award.description %></p>
+            <div class="award-details">
+              <span class="award-category"><%= award.category %></span>
+              <span class="award-date"><%= award.date %></span>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+    
+    <div class="awards-btn-row">
+      <a href="/full-achievement" class="awards-view-btn">
+        <i class="fas fa-search"></i>
+        View Full Achievements
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="projects-preview" class="projects-preview-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="header-content">
+        <i class="fas fa-rocket rocket-icon"></i>
+        <h2>Featured Projects</h2>
+      </div>
+      <div class="header-underline"></div>
+    </div>
+
+    <div class="projects-preview-grid">
+      <% projects.slice(0, 3).forEach(project => { %>
+        <div class="project-preview-card">
+          <div class="project-preview-image">
+            <% if (project.image && project.image !== '/images/default-project.jpg') { %>
+              <img src="<%= project.image %>" alt="<%= project.title %>" onerror="this.parentElement.innerHTML='<div class=\'placeholder-image\'><i class=\'fas fa-image\'></i><p>Project Image</p></div>'">
+            <% } else { %>
+              <div class="placeholder-image">
+                <i class="fas fa-image"></i>
+                <p>Project Image</p>
+              </div>
+            <% } %>
+          </div>
+          <div class="project-preview-content">
+            <h3 class="project-preview-title"><%= project.title %></h3>
+            <p class="project-preview-description"><%= project.description %></p>
+            <div class="project-preview-skills">
+              <span class="skills-text"><%= project.skills %></span>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+    
+    <div class="projects-preview-btn-row">
+      <a href="/projects" class="projects-view-btn">
+        <i class="fas fa-eye"></i>
+        View All Projects
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<section id="connect" class="connect-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="header-content">
+        <i class="fas fa-handshake connect-icon"></i>
+        <h2>Let's Connect</h2>
+      </div>
+      <div class="header-underline"></div>
+    </div>
+
+    <div class="connect-content">
+      <div class="contact-info">
+        <h3><i class="fas fa-envelope"></i> Get In Touch</h3>
+        <p>Feel free to reach out for collaborations, projects, or just a chat!</p>
+        
+        <div class="contact-details">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>sushantawalekar286@gmail.com</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Location</h4>
+              <p>Maharashtra, India</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <i class="fas fa-graduation-cap"></i>
+            <div>
+              <h4>Education</h4>
+              <p>B.Tech Computer Science, TKIET</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-buttons">
+          <a href="/contact" class="contact-btn">
+            <i class="fas fa-envelope"></i> Send Message
+          </a>
+          <a href="/resume" class="contact-btn">
+            <i class="fas fa-file-alt"></i> View Resume
+          </a>
+        </div>
+      </div>
+
+      <div class="social-profiles">
+        <h3><i class="fas fa-share-alt"></i> Connect With Me</h3>
+        <p>Follow me on social media and check out my coding profiles!</p>
+        
+        <div class="social-grid">
+          <a href="https://www.linkedin.com/in/sushant-awalekar-a3b13429a/" class="social-card" target="_blank">
+            <i class="fab fa-linkedin"></i>
+            <h4>LinkedIn</h4>
+            <p>Professional Network</p>
+          </a>
+          
+          <a href="https://github.com/sushantawalekar286" class="social-card" target="_blank">
+            <i class="fab fa-github"></i>
+            <h4>GitHub</h4>
+            <p>Code Repository</p>
+          </a>
+          
+          <a href="https://www.instagram.com/sushant_awalekar/" class="social-card" target="_blank">
+            <i class="fab fa-instagram"></i>
+            <h4>Instagram</h4>
+            <p>Personal Life</p>
+          </a>
+          
+          <a href="https://www.facebook.com/sushant.awalekar.56" class="social-card" target="_blank">
+            <i class="fab fa-facebook"></i>
+            <h4>Facebook</h4>
+            <p>Social Network</p>
+          </a>
+          
+          <a href="https://leetcode.com/sushantawalekar286" class="social-card" target="_blank">
+            <i class="fas fa-code"></i>
+            <h4>LeetCode</h4>
+            <p>Coding Practice</p>
+          </a>
+          
+          <a href="https://www.hackerrank.com/sushantawalekar1" class="social-card" target="_blank">
+            <i class="fas fa-laptop-code"></i>
+            <h4>HackerRank</h4>
+            <p>Problem Solving</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <%- include('partials/footer') %>

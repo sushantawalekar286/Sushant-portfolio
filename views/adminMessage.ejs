@@ -1,0 +1,149 @@
+<%- include('partials/header') %>
+
+<section id="admin-messages" class="admin-messages-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="header-content">
+        <i class="fas fa-inbox admin-icon"></i>
+        <h2>Admin Dashboard - Contact Messages</h2>
+      </div>
+      <div class="header-underline"></div>
+    </div>
+
+    <div class="admin-stats">
+      <div class="stat-card">
+        <i class="fas fa-envelope"></i>
+        <h3><%= messages.length %></h3>
+        <p>Total Messages</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-clock"></i>
+        <h3><%= messages.filter(m => new Date(m.date) > new Date(Date.now() - 24*60*60*1000)).length %></h3>
+        <p>Last 24 Hours</p>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-calendar"></i>
+        <h3><%= messages.filter(m => new Date(m.date) > new Date(Date.now() - 7*24*60*60*1000)).length %></h3>
+        <p>This Week</p>
+      </div>
+    </div>
+
+    <div class="messages-container">
+      <div class="messages-header">
+        <h3><i class="fas fa-list"></i> All Messages</h3>
+        <div class="filter-options">
+          <select id="sortFilter" class="filter-select">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="unread">Unread Only</option>
+          </select>
+        </div>
+      </div>
+
+      <% if (messages.length === 0) { %>
+        <div class="no-messages">
+          <i class="fas fa-inbox"></i>
+          <h3>No Messages Yet</h3>
+          <p>Contact form messages will appear here when visitors send them.</p>
+        </div>
+      <% } else { %>
+        <div class="messages-list">
+          <% messages.forEach((message, index) => { %>
+            <div class="message-card" data-id="<%= message._id %>">
+              <div class="message-header">
+                <div class="message-info">
+                  <h4><%= message.name %></h4>
+                  <p class="message-email"><%= message.email %></p>
+                  <p class="message-date">
+                    <i class="fas fa-clock"></i>
+                    <%= new Date(message.date).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    }) %>
+                  </p>
+                </div>
+                <div class="message-actions">
+                  <button class="action-btn view-btn" onclick="viewMessage('<%= index %>')">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="action-btn delete-btn" onclick="deleteMessage('<%= message._id %>')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="message-preview">
+                <p><%= message.message.length > 100 ? message.message.substring(0, 100) + '...' : message.message %></p>
+              </div>
+              
+              <div class="message-full" id="message-<%= index %>" style="display: none;">
+                <div class="message-content">
+                  <h5>Full Message:</h5>
+                  <p><%= message.message %></p>
+                </div>
+                <div class="message-actions-full">
+                  <a href="mailto:<%= message.email %>" class="reply-btn">
+                    <i class="fas fa-reply"></i>
+                    Reply via Email
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="admin-actions">
+      <a href="/" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+      </a>
+      <button class="refresh-btn" onclick="location.reload()">
+        <i class="fas fa-sync-alt"></i>
+        Refresh Messages
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+function viewMessage(index) {
+  const messageFull = document.getElementById(`message-${index}`);
+  const isVisible = messageFull.style.display !== 'none';
+  
+  // Hide all other messages
+  document.querySelectorAll('.message-full').forEach(msg => {
+    msg.style.display = 'none';
+  });
+  
+  // Toggle current message
+  messageFull.style.display = isVisible ? 'none' : 'block';
+}
+
+function deleteMessage(messageId) {
+  if (confirm('Are you sure you want to delete this message? This action cannot be undone.')) {
+    // Here you would typically make an AJAX call to delete the message
+    // For now, we'll just remove it from the DOM
+    const messageCard = document.querySelector(`[data-id="${messageId}"]`);
+    if (messageCard) {
+      messageCard.remove();
+    }
+  }
+}
+
+// Sort and filter functionality
+document.getElementById('sortFilter').addEventListener('change', function() {
+  const filter = this.value;
+  const messagesList = document.querySelector('.messages-list');
+  const messages = Array.from(messagesList.children);
+  
+  // You can implement sorting logic here based on the filter value
+  console.log('Filter changed to:', filter);
+});
+</script>
+
+<%- include('partials/footer') %>

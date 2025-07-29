@@ -1,11 +1,103 @@
 <%- include('partials/header') %>
-<section>
-  <h2>Contact Me</h2>
-  <form action="/contact" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required><br>
-    <input type="email" name="email" placeholder="Your Email" required><br>
-    <textarea name="message" placeholder="Message"></textarea><br>
-    <button type="submit">Send</button>
-  </form>
+
+<section id="contact" class="contact-page-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="header-content">
+        <i class="fas fa-envelope contact-page-icon"></i>
+        <h2>Get In Touch</h2>
+      </div>
+      <div class="header-underline"></div>
+    </div>
+
+    <div class="contact-page-content">
+      <div class="contact-info-sidebar">
+        <h3><i class="fas fa-info-circle"></i> Contact Information</h3>
+        <div class="contact-info-items">
+          <div class="contact-info-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>sushantawalekar286@gmail.com</p>
+            </div>
+          </div>
+          
+          <div class="contact-info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Location</h4>
+              <p>Maharashtra, India</p>
+            </div>
+          </div>
+          
+          <div class="contact-info-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <h4>Response Time</h4>
+              <p>Within 24 hours</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links-sidebar">
+          <h4>Connect on Social Media</h4>
+          <div class="social-links-grid">
+            <a href="https://www.linkedin.com/in/sushant-awalekar-a3b13429a/" target="_blank" class="social-link">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/sushantawalekar286" target="_blank" class="social-link">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.instagram.com/sushant_awalekar/" target="_blank" class="social-link">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/sushant_awalekar" target="_blank" class="social-link">
+              <i class="fab fa-facebook"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-container">
+        <h3><i class="fas fa-paper-plane"></i> Send Message</h3>
+        <p>Feel free to reach out for collaborations, projects, or just a chat!</p>
+        
+        <form action="/contact" method="POST" class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="What's this about?">
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="6" placeholder="Tell me about your project or inquiry..." required></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i>
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="back-to-home">
+      <a href="/" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+      </a>
+    </div>
+  </div>
 </section>
+
 <%- include('partials/footer') %>

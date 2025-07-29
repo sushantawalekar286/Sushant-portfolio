@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+
+<section id="full-achievements" class="full-achievements-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="header-content">
+        <i class="fas fa-trophy trophy-icon"></i>
+        <h2>All Achievements & Certifications</h2>
+      </div>
+      <div class="header-underline"></div>
+    </div>
+
+    <div class="achievements-intro">
+      <p>Here's a comprehensive list of all my awards, achievements, and certifications that showcase my journey in technology and development.</p>
+    </div>
+
+    <div class="achievements-grid">
+      <% awards.forEach(award => { %>
+        <div class="achievement-card">
+          <div class="achievement-image">
+            <% if (award.image && award.image !== '/images/default-award.jpg') { %>
+              <img src="<%= award.image %>" alt="<%= award.title %>" onerror="this.parentElement.innerHTML='<div class=\'placeholder-image\'><i class=\'fas fa-trophy\'></i><p>Award Image</p></div>'">
+            <% } else { %>
+              <div class="placeholder-image">
+                <i class="fas fa-trophy"></i>
+                <p>Award Image</p>
+              </div>
+            <% } %>
+          </div>
+          <div class="achievement-content">
+            <h3 class="achievement-title"><%= award.title %></h3>
+            <p class="achievement-event"><%= award.event %></p>
+            <p class="achievement-description"><%= award.description %></p>
+            <div class="achievement-details">
+              <span class="achievement-category"><%= award.category %></span>
+              <span class="achievement-date"><%= award.date %></span>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+
+    <div class="back-to-home">
+      <a href="/" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+      </a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %> 
