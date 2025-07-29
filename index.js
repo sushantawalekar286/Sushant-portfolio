@@ -7,6 +7,7 @@ const Project = require("./models/project");
 const Achievement = require("./models/achievement");
 const TechCategory = require("./models/techstack");
 const session = require('express-session');
+const admin=require("./models/admin")
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -27,8 +28,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/portfolioDB")
   .catch((err) => console.log("Mongo error:", err));
 
 // Admin credentials (in production, use environment variables)
-const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD = 'admin123';
+
 
 // Middleware to check if user is authenticated
 const requireAuth = (req, res, next) => {
@@ -160,6 +160,16 @@ app.get('/about', async (req, res) => {
   }
 });
 
+app.get('/full_tech_stack', async (req, res) => {
+  try {
+    const techstack = await TechCategory.find();
+    res.render('full_tech_stack', { techstack });
+  } catch (error) {
+    console.error('Error loading full tech stack page:', error);
+    res.status(500).send('Error loading full tech stack page');
+  }
+});
+
 app.get('/projects', async (req, res) => {
   try {
     const projects = await Project.find();
@@ -192,7 +202,7 @@ app.get('/admin/login', (req, res) => {
 app.post('/admin/login', (req, res) => {
   const { username, password } = req.body;
   
-  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+  if (username === admin.username && password === admin.password) {
     req.session.isAuthenticated = true;
     res.redirect('/admin/dashboard');
   } else {

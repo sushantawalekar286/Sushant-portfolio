@@ -2,61 +2,72 @@
   <div class="tech-stack-container">
     <div class="tech-stack-categories">
       <% techstack.forEach((category, index) => { %>
-        <button class="tech-cat-btn <%= index === 0 ? 'active' : '' %>" data-category="<%= category._id %>">
-          <i class="<%= category.icon || 'fas fa-cog' %>"></i> <%= category.category %>
-        </button>
+      <button
+        class="tech-cat-btn <%= index === 0 ? 'active' : '' %>"
+        data-category="<%= category._id %>"
+      >
+        <i class="<%= category.icon || 'fas fa-cog' %>"></i> <%=
+        category.category %>
+      </button>
       <% }); %>
     </div>
-    
+
     <div class="tech-stack-details">
       <% techstack.forEach((category, index) => { %>
-        <div class="tech-cat-content" id="<%= category._id %>" style="display: <%= index === 0 ? 'block' : 'none' %>;">
-          <% category.items.forEach(item => { %>
-            <span class="tech-item">
-              <% if (item.icon && item.icon !== '/images/default-tech.svg') { %>
-                <img src="<%= item.icon %>" alt="<%= item.name %>" class="tech-icon" onerror="this.style.display='none'">
-              <% } %>
-              <%= item.name %>
-            </span>
-          <% }); %>
-        </div>
+      <div
+        class="tech-cat-content <%= index === 0 ? 'show' : 'hide' %>"
+        id="<%= category._id %>"
+      >
+        <% category.items.forEach(item => { %>
+        <span class="tech-item">
+          <% if (item.icon && item.icon !== '/images/default-tech.svg') { %>
+          <img
+            src="<%= item.icon %>"
+            alt="<%= item.name %>"
+            class="tech-icon"
+            onerror="this.style.display='none'"
+          />
+          <% } %> <%= item.name %>
+        </span>
+        <% }); %>
+      </div>
       <% }); %>
     </div>
   </div>
-  
+
   <div class="tech-stack-btn-row">
-    <a href="/full-tech-stack" class="tech-stack-view-btn">
+    <a href="/full_tech_stack" class="tech-stack-view-btn">
       <i class="fas fa-search"></i> View Full Tech Stack
     </a>
   </div>
 </div>
 
 <script>
-// Tech stack category switching functionality
-document.addEventListener('DOMContentLoaded', function() {
-  const categoryButtons = document.querySelectorAll('.tech-cat-btn');
-  const categoryContents = document.querySelectorAll('.tech-cat-content');
+  // Tech stack category switching functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const categoryButtons = document.querySelectorAll(".tech-cat-btn");
+    const categoryContents = document.querySelectorAll(".tech-cat-content");
 
-  categoryButtons.forEach(button => {
-    button.addEventListener('click', function(){
-      // Remove active class from all buttons
-      categoryButtons.forEach(btn => btn.classList.remove('active'));
-      
-      // Add active class to clicked button
-      this.classList.add('active');
-      
-      // Hide all category contents
-      categoryContents.forEach(content => {
-        content.style.display = 'none';
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        // Remove active class from all buttons
+        categoryButtons.forEach((btn) => btn.classList.remove("active"));
+
+        // Add active class to clicked button
+        this.classList.add("active");
+
+        // Hide all category contents
+        categoryContents.forEach((content) => {
+          content.style.display = "none";
+        });
+
+        // Show the corresponding category content
+        const categoryId = this.getAttribute("data-category");
+        const targetContent = document.getElementById(categoryId);
+        if (targetContent) {
+          targetContent.style.display = "block";
+        }
       });
-      
-      // Show the corresponding category content
-      const categoryId = this.getAttribute('data-category');
-      const targetContent = document.getElementById(categoryId);
-      if (targetContent) {
-        targetContent.style.display = 'block';
-      }
     });
   });
-});
 </script>

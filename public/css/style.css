@@ -2738,3 +2738,5 @@ footer p {
     padding: 6px 12px;
   }
 }
+.hide { display: none; }
+.show { display: block; }
