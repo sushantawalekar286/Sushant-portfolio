@@ -1,25 +1,129 @@
 <%- include('partials/header') %>
 
-<div class="tech-stack-full">
-  <h2 class="tech-stack-title">
-    <span style="font-size:1.2em;">🚀</span> My Tech Stack
-  </h2>
-  <div class="tech-stack-underline"></div>
-
-  <% for(let cat of techstack) { %>
-    <h3 class="tech-stack-category">
-      <span style="font-size:1.2em;"><%= cat.icon %></span>
-      <span style="color:#ffd600;"><%= cat.category %></span>
-    </h3>
-    <div class="tech-stack-row">
-      <% for(let item of cat.items) { %>
-        <div class="tech-stack-item">
-          <img src="<%= item.icon %>" alt="<%= item.name %>" />
-          <span><%= item.name %></span>
+<div class="full-tech-stack-section">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="section-header">
+      <div class="header-content">
+        <div class="tech-stack-icon">
+          <i class="fas fa-rocket"></i>
         </div>
-      <% } %>
+        <h2>My Complete Technical Arsenal</h2>
+        <div class="header-underline"></div>
+        <p class="section-subtitle">A comprehensive showcase of my technical skills, tools, and technologies</p>
+      </div>
     </div>
-  <% } %>
+
+    <!-- Tech Stack Categories -->
+    <div class="tech-stack-categories-grid">
+      <% techstack.forEach((category, index) => { %>
+        <div class="tech-category-card" data-category="<%= category._id %>">
+          <div class="category-header">
+            <div class="category-icon">
+              <i class="<%= category.icon || 'fas fa-cog' %>"></i>
+            </div>
+            <h3 class="category-title"><%= category.category %></h3>
+            <div class="category-count"><%= category.items.length %> technologies</div>
+          </div>
+          
+          <div class="tech-items-grid">
+            <% category.items.forEach(item => { %>
+              <div class="tech-item-card">
+                <div class="tech-item-icon">
+                  <% if (item.icon && item.icon !== '/images/default-tech.svg') { %>
+                    <img src="<%= item.icon %>" alt="<%= item.name %>" onerror="this.style.display='none'">
+                  <% } else { %>
+                    <i class="fas fa-code"></i>
+                  <% } %>
+                </div>
+                <div class="tech-item-info">
+                  <h4 class="tech-item-name"><%= item.name %></h4>
+                  <div class="tech-item-level">
+                    <div class="skill-bar">
+                     <div class="skill-progress"></div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+
+    <!-- Skills Summary -->
+    <div class="skills-summary">
+      <div class="summary-card">
+        <div class="summary-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="summary-content">
+          <h3>Skills Overview</h3>
+          <div class="summary-stats">
+            <div class="stat-item">
+              <span class="stat-number"><%= techstack.reduce((total, cat) => total + cat.items.length, 0) %></span>
+              <span class="stat-label">Total Technologies</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number"><%= techstack.length %></span>
+              <span class="stat-label">Categories</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">5+</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Home Button -->
+    <div class="back-to-home">
+      <a href="/" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Back to Portfolio
+      </a>
+    </div>
+  </div>
 </div>
+
+<script>
+// Add animation on scroll
+document.addEventListener('DOMContentLoaded', function() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all tech category cards
+  document.querySelectorAll('.tech-category-card').forEach(card => {
+    observer.observe(card);
+  });
+
+  // Add hover effects
+  document.querySelectorAll('.tech-item-card').forEach(item => {
+    item.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-5px) scale(1.02)';
+    });
+    
+    item.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0) scale(1)';
+    });
+  });
+});
+
+const progress = document.querySelector('.skill-progress');
+  progress.style.width = (Math.floor(Math.random() * 40) + 60) + '%';
+</script>
 
 <%- include('partials/footer') %>

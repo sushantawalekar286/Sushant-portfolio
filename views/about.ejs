@@ -1,28 +1,69 @@
+<%- include('partials/header') %>
 
 <section id="about" class="about-section">
   <div class="container">
     <div class="section-header">
       <div class="header-content">
-        <i class="fas fa-user about-icon"></i>
+        <div class="about-icon">
+          <i class="fas fa-user"></i>
+        </div>
         <h2>About Me</h2>
+        <div class="header-underline"></div>
       </div>
-      <div class="header-underline"></div>
     </div>
 
-    <div class="about-content">
-      <p>
-        I'm <strong>Sushant Bhairu Awalekar</strong>, a B.Tech Computer Science student at <strong>TKIET Warananagar</strong>.
-        After scoring 56% in my 12th, I committed myself to growth, learning, and skill development. I've built a strong foundation
-        in programming, full-stack development, and problem-solving through self-driven projects and continuous learning.
-      </p>
-      <p>
-        I'm deeply passionate about <strong>AI, web development, and digital transformation</strong>. I enjoy building tech that makes a real difference.
-        My goal is to become a skilled <strong>Full-Stack Developer</strong> who contributes to meaningful, inclusive, and innovative digital solutions.
-      </p>
-      <p>
-        I'm always exploring new technologies, seeking opportunities to grow, and working on projects that challenge my thinking. Whether it's
-        developing apps, solving problems, or learning new frameworks, I'm constantly pushing myself forward.
-      </p>
+    <div class="about-content-wrapper">
+      <div class="about-photo">
+        <div class="photo-container">
+          <img src="/images/profile-photo.jpg" alt="Sushant Awalekar" class="profile-photo">
+          <div class="photo-overlay">
+            <div class="photo-info">
+              <h3>Sushant Bhairu Awalekar</h3>
+              <p>Full Stack Developer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="about-text">
+        <div class="about-intro">
+          <h3>Hello! I'm Sushant 👋</h3>
+          <p class="intro-text">
+            A passionate <strong>B.Tech Computer Science</strong> student at <strong>TKIET Warananagar</strong> with a drive for innovation and problem-solving.
+          </p>
+        </div>
+        
+        <div class="about-details">
+          <p>
+            After scoring 56% in my 12th, I committed myself to growth, learning, and skill development. I've built a strong foundation
+            in programming, full-stack development, and problem-solving through self-driven projects and continuous learning.
+          </p>
+          <p>
+            I'm deeply passionate about <strong>AI, web development, and digital transformation</strong>. I enjoy building tech that makes a real difference.
+            My goal is to become a skilled <strong>Full-Stack Developer</strong> who contributes to meaningful, inclusive, and innovative digital solutions.
+          </p>
+          <p>
+            I'm always exploring new technologies, seeking opportunities to grow, and working on projects that challenge my thinking. Whether it's
+            developing apps, solving problems, or learning new frameworks, I'm constantly pushing myself forward.
+          </p>
+        </div>
+        
+        <div class="about-highlights">
+          <div class="highlight-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span>B.Tech Computer Science</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fas fa-university"></i>
+            <span>TKIET Warananagar</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fas fa-code"></i>
+            <span>Full Stack Developer</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+

@@ -6,6 +6,8 @@ const Contact = require("./models/contact");
 const Project = require("./models/project");
 const Achievement = require("./models/achievement");
 const TechCategory = require("./models/techstack");
+const Extracurricular = require("./models/extracurricular");
+const Visitor = require("./models/visitor");
 const session = require('express-session');
 const admin=require("./models/admin")
 
@@ -22,6 +24,21 @@ app.use(session({
   saveUninitialized: false,
   cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 } // 24 hours
 }));
+
+// Visitor tracking middleware
+app.use(async (req, res, next) => {
+  try {
+    // Only count unique visits (you can enhance this with IP tracking)
+    if (req.path === '/' && !req.session.visited) {
+      await Visitor.incrementCount();
+      req.session.visited = true;
+    }
+    next();
+  } catch (error) {
+    console.error('Error tracking visitor:', error);
+    next();
+  }
+});
 
 mongoose.connect("mongodb://127.0.0.1:27017/portfolioDB")
   .then(() => console.log("MongoDB connected"))
@@ -97,45 +114,78 @@ async function initializeDefaultData() {
     if (techCount === 0) {
       const defaultTechCategories = [
         {
-          category: "Frontend",
-          icon: "💻",
+          category: "Programming & Development",
+          icon: "fas fa-code",
           items: [
-            { name: "HTML5", icon: "/images/html.svg" },
-            { name: "CSS3", icon: "/images/css.svg" },
-            { name: "JavaScript", icon: "/images/js.svg" },
-            { name: "React", icon: "/images/react.svg" }
-          ]
-        },
-        {
-          category: "Backend",
-          icon: "⚙️",
-          items: [
-            { name: "Node.js", icon: "/images/nodejs.svg" },
-            { name: "Express.js", icon: "/images/express.svg" },
+            { name: "Java & Core Java", icon: "/images/java.jpg" },
             { name: "Python", icon: "/images/python.svg" },
-            { name: "Java", icon: "/images/java.svg" }
+            { name: "C & C++", icon: "/images/c.jpeg" },
+            { name: "JavaScript", icon: "/images/js.svg" },
+            { name: "HTML5, CSS3, Bootstrap", icon: "/images/html.svg" },
+            { name: "PHP, SQL, MySQL", icon: "/images/php.svg" },
+            { name: "Data Structures & Algorithms", icon: "/images/dsa.svg" },
+            { name: "Competitive Programming", icon: "/images/cp.svg" },
+            { name: "Version Control (Git)", icon: "/images/git.svg" }
           ]
         },
         {
-          category: "Database",
-          icon: "🗄️",
+          category: "Frameworks & Tools",
+          icon: "fas fa-tools",
+          items: [
+            { name: "React.js", icon: "/images/react.svg" },
+            { name: "Node.js & Express.js", icon: "/images/nodejs.svg" },
+            { name: "Android (Java/XML)", icon: "/images/android.svg" },
+            { name: "Bootstrap", icon: "/images/bootstrap.svg" },
+            { name: "jQuery", icon: "/images/jquery.svg" },
+            { name: "RESTful APIs", icon: "/images/api.svg" },
+            { name: "Postman", icon: "/images/postman.svg" },
+            { name: "VS Code", icon: "/images/vscode.svg" }
+          ]
+        },
+        {
+          category: "Core Technologies",
+          icon: "fas fa-microchip",
           items: [
             { name: "MongoDB", icon: "/images/mongodb.svg" },
             { name: "MySQL", icon: "/images/mysql.svg" },
-            { name: "PostgreSQL", icon: "/images/postgresql.svg" }
+            { name: "PostgreSQL", icon: "/images/postgresql.svg" },
+            { name: "Firebase", icon: "/images/firebase.svg" },
+            { name: "AWS", icon: "/images/aws.svg" },
+            { name: "Docker", icon: "/images/docker.svg" },
+            { name: "Linux", icon: "/images/linux.svg" },
+            { name: "Apache", icon: "/images/apache.svg" }
+          ]
+        },
+        {
+          category: "Professional Skills",
+          icon: "fas fa-users",
+          items: [
+            { name: "Agile/Scrum", icon: "/images/agile.svg" },
+            { name: "Team Leadership", icon: "/images/leadership.svg" },
+            { name: "Problem Solving", icon: "/images/problem-solving.svg" },
+            { name: "System Design", icon: "/images/system-design.svg" },
+            { name: "Code Review", icon: "/images/code-review.svg" },
+            { name: "Technical Writing", icon: "/images/technical-writing.svg" },
+            { name: "Project Management", icon: "/images/project-management.svg" },
+            { name: "Mentoring", icon: "/images/mentoring.svg" }
           ]
         }
       ];
       await TechCategory.insertMany(defaultTechCategories);
       console.log("Default tech categories initialized");
     }
+
+    // Initialize visitor count if it doesn't exist
+    const visitorCount = await Visitor.countDocuments();
+    if (visitorCount === 0) {
+      await Visitor.create({ count: 0 });
+      console.log("Visitor count initialized");
+    }
   } catch (error) {
     console.error("Error initializing default data:", error);
   }
 }
 
-// Initialize default data when server starts
-initializeDefaultData();
 
 // Routes
 app.get('/', async (req, res) => {
@@ -143,7 +193,8 @@ app.get('/', async (req, res) => {
     const projects = await Project.find().limit(3);
     const awards = await Achievement.find().limit(3);
     const techstack = await TechCategory.find();
-    res.render('home', { projects, awards, techstack });
+    const visitorCount = await Visitor.getVisitorCount();
+    res.render('home', { projects, awards, techstack, visitorCount: visitorCount.count });
   } catch (error) {
     console.error('Error loading home page:', error);
     res.status(500).send('Error loading home page');
@@ -157,6 +208,16 @@ app.get('/about', async (req, res) => {
   } catch (error) {
     console.error('Error loading about page:', error);
     res.status(500).send('Error loading about page');
+  }
+});
+
+app.get('/extracurricular', async (req, res) => {
+  try {
+    const activities = await Extracurricular.find().sort({ date: -1 });
+    res.render('extracurricular', { activities });
+  } catch (error) {
+    console.error('Error loading extracurricular page:', error);
+    res.status(500).send('Error loading extracurricular page');
   }
 });
 
@@ -221,7 +282,8 @@ app.get('/admin/dashboard', requireAuth, async (req, res) => {
     const projects = await Project.find();
     const awards = await Achievement.find();
     const techstack = await TechCategory.find();
-    res.render('adminDashboard', { projects, awards, techstack, messages });
+    const activities = await Extracurricular.find();
+    res.render('adminDashboard', { projects, awards, techstack, messages, activities });
   } catch (error) {
     console.error('Error loading dashboard:', error);
     res.status(500).send('Error loading dashboard');
@@ -464,18 +526,97 @@ app.delete('/admin/tech-items/:catId/:itemId', requireAuth, async (req, res) => 
   }
 });
 
-// About Section Management
-app.post('/admin/about', requireAuth, async (req, res) => {
-  const { name, title, institution, description, skills } = req.body;
+// Extracurricular Activities CRUD
+app.get('/admin/extracurricular/:id', requireAuth, async (req, res) => {
+  try {
+    const activity = await Extracurricular.findById(req.params.id);
+    if (activity) {
+      res.json(activity);
+    } else {
+      res.status(404).json({ success: false, message: 'Activity not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching activity:', error);
+    res.status(500).json({ success: false, message: 'Error fetching activity' });
+  }
+});
+
+app.post('/admin/extracurricular', requireAuth, async (req, res) => {
+  const { title, description, category, date, image, role, duration, technologies, achievements } = req.body;
   
   try {
-    // For now, we'll just return success since we're not storing about data in DB yet
-    // In a real application, you would save this to a database
-    console.log('About section updated:', { name, title, institution, description, skills });
-    res.json({ success: true, message: 'About section updated successfully' });
+    await Extracurricular.create({
+      title,
+      description,
+      category: category || 'Other',
+      date: date || new Date().getFullYear().toString(),
+      image: image || '/images/default-activity.jpg',
+      role: role || 'Participant',
+      duration: duration || 'Ongoing',
+      technologies: technologies ? technologies.split(',').map(tech => tech.trim()) : [],
+      achievements: achievements ? achievements.split(',').map(achievement => achievement.trim()) : []
+    });
+    res.json({ success: true, message: 'Activity added successfully' });
   } catch (err) {
-    console.error('Error updating about section:', err);
-    res.status(500).json({ success: false, message: 'Error updating about section' });
+    console.error('Error adding activity:', err);
+    res.status(500).json({ success: false, message: 'Error adding activity' });
+  }
+});
+
+app.put('/admin/extracurricular/:id', requireAuth, async (req, res) => {
+  const { title, description, category, date, image, role, duration, technologies, achievements } = req.body;
+  
+  try {
+    const activity = await Extracurricular.findByIdAndUpdate(req.params.id, {
+      title,
+      description,
+      category: category || 'Other',
+      date: date || new Date().getFullYear().toString(),
+      image: image || '/images/default-activity.jpg',
+      role: role || 'Participant',
+      duration: duration || 'Ongoing',
+      technologies: technologies ? technologies.split(',').map(tech => tech.trim()) : [],
+      achievements: achievements ? achievements.split(',').map(achievement => achievement.trim()) : []
+    }, { new: true });
+    
+    if (activity) {
+      res.json({ success: true, message: 'Activity updated successfully' });
+    } else {
+      res.status(404).json({ success: false, message: 'Activity not found' });
+    }
+  } catch (err) {
+    console.error('Error updating activity:', err);
+    res.status(500).json({ success: false, message: 'Error updating activity' });
+  }
+});
+
+app.delete('/admin/extracurricular/:id', requireAuth, async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await Extracurricular.findByIdAndDelete(id);
+    if (result) {
+      res.json({ success: true, message: 'Activity deleted successfully' });
+    } else {
+      res.status(404).json({ success: false, message: 'Activity not found' });
+    }
+  } catch (err) {
+    console.error('Error deleting activity:', err);
+    res.status(500).json({ success: false, message: 'Error deleting activity' });
+  }
+});
+
+// About Section Management
+app.post('/admin/about', requireAuth, async (req, res) => {
+  try {
+    // About section is read-only - show message in console
+    console.log('About section is read-only. To modify the About section, please edit the views/about.ejs file directly.');
+    res.json({ 
+      success: false, 
+      message: 'About section is read-only. To modify content, please edit the views/about.ejs file directly.' 
+    });
+  } catch (err) {
+    console.error('Error with about section:', err);
+    res.status(500).json({ success: false, message: 'About section is read-only' });
   }
 });
 
@@ -498,6 +639,17 @@ app.get("/admin/message", async (req, res) => {
 
 app.get('/contact', (req, res) => {
   res.render('contact');
+});
+
+// Visitor count API endpoint
+app.get('/api/visitor-count', async (req, res) => {
+  try {
+    const visitor = await Visitor.getVisitorCount();
+    res.json({ count: visitor.count });
+  } catch (error) {
+    console.error('Error getting visitor count:', error);
+    res.status(500).json({ error: 'Failed to get visitor count' });
+  }
 });
 
 app.listen(3000, () => {
