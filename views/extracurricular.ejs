@@ -1,0 +1,265 @@
+<%- include('partials/header') %>
+
+<section class="extracurricular-section">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="section-header">
+      <div class="header-content">
+        <div class="extracurricular-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h2>Extracurricular Activities</h2>
+        <div class="header-underline"></div>
+        <p class="section-subtitle">Beyond academics - my involvement in college life, events, and community</p>
+      </div>
+    </div>
+
+    <% if (activities && activities.length > 0) { %>
+      <!-- College Clubs & Committees -->
+      <div class="activities-section">
+        <div class="section-title">
+          <h3><i class="fas fa-graduation-cap"></i> College Clubs & Committees</h3>
+          <div class="title-underline"></div>
+        </div>
+        
+        <div class="activities-grid">
+          <% activities.filter(activity => activity.category === 'College Clubs').forEach(activity => { %>
+            <div class="activity-card">
+              <div class="activity-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <div class="activity-content">
+                <h4><%= activity.title %></h4>
+                <p class="activity-description">
+                  <%= activity.description %>
+                </p>
+                <div class="activity-details">
+                  <span class="activity-role"><%= activity.role %></span>
+                  <span class="activity-duration"><%= activity.duration %></span>
+                </div>
+                <% if (activity.technologies && activity.technologies.length > 0) { %>
+                  <div class="activity-tech">
+                    <% activity.technologies.forEach(tech => { %>
+                      <span class="tech-tag"><%= tech %></span>
+                    <% }); %>
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+
+      <!-- Events & Competitions -->
+      <div class="activities-section">
+        <div class="section-title">
+          <h3><i class="fas fa-trophy"></i> Events & Competitions</h3>
+          <div class="title-underline"></div>
+        </div>
+        
+        <div class="events-grid">
+          <% activities.filter(activity => activity.category === 'Events & Competitions').forEach(activity => { %>
+            <div class="event-card">
+              <div class="event-header">
+                <div class="event-icon">
+                  <i class="fas fa-hackathon"></i>
+                </div>
+                <div class="event-badge"><%= activity.role %></div>
+              </div>
+              <div class="event-content">
+                <h4><%= activity.title %></h4>
+                <p class="event-description">
+                  <%= activity.description %>
+                </p>
+                <% if (activity.technologies && activity.technologies.length > 0) { %>
+                  <div class="event-tech">
+                    <% activity.technologies.forEach(tech => { %>
+                      <span class="tech-tag"><%= tech %></span>
+                    <% }); %>
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+
+      <!-- Tech Communities -->
+      <div class="activities-section">
+        <div class="section-title">
+          <h3><i class="fas fa-globe"></i> Tech Communities</h3>
+          <div class="title-underline"></div>
+        </div>
+        
+        <div class="communities-grid">
+          <% activities.filter(activity => activity.category === 'Tech Communities').forEach(activity => { %>
+            <div class="community-card">
+              <div class="community-icon">
+                <i class="fab fa-github"></i>
+              </div>
+              <div class="community-content">
+                <h4><%= activity.title %></h4>
+                <p class="community-description">
+                  <%= activity.description %>
+                </p>
+                <div class="community-stats">
+                  <% if (activity.achievements && activity.achievements.length > 0) { %>
+                    <% activity.achievements.forEach(achievement => { %>
+                      <span class="stat"><%= achievement %></span>
+                    <% }); %>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+
+      <!-- Leadership Activities -->
+      <div class="activities-section">
+        <div class="section-title">
+          <h3><i class="fas fa-handshake"></i> Leadership & Other Activities</h3>
+          <div class="title-underline"></div>
+        </div>
+        
+        <div class="activities-grid">
+          <% activities.filter(activity => activity.category === 'Leadership' || activity.category === 'Other').forEach(activity => { %>
+            <div class="activity-card">
+              <div class="activity-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="activity-content">
+                <h4><%= activity.title %></h4>
+                <p class="activity-description">
+                  <%= activity.description %>
+                </p>
+                <div class="activity-details">
+                  <span class="activity-role"><%= activity.role %></span>
+                  <span class="activity-duration"><%= activity.duration %></span>
+                </div>
+                <% if (activity.technologies && activity.technologies.length > 0) { %>
+                  <div class="activity-tech">
+                    <% activity.technologies.forEach(tech => { %>
+                      <span class="tech-tag"><%= tech %></span>
+                    <% }); %>
+                  </div>
+                <% } %>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    <% } else { %>
+      <!-- No Activities Message -->
+      <div class="no-activities">
+        <div class="no-activities-icon">
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <h3>No Activities Added Yet</h3>
+        <p>Extracurricular activities will be displayed here once they are added through the admin panel.</p>
+      </div>
+    <% } %>
+
+    <!-- Skills Developed -->
+    <div class="skills-developed">
+      <div class="skills-header">
+        <h3><i class="fas fa-star"></i> Skills Developed Through Activities</h3>
+        <p>These extracurricular activities have helped me develop various skills beyond technical knowledge</p>
+      </div>
+      
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h4>Leadership</h4>
+          <p>Leading teams in hackathons and organizing events</p>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">
+            <i class="fas fa-comments"></i>
+          </div>
+          <h4>Communication</h4>
+          <p>Presenting projects and networking with professionals</p>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h4>Problem Solving</h4>
+          <p>Solving complex problems in competitions</p>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h4>Time Management</h4>
+          <p>Balancing academics with extracurricular activities</p>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h4>Teamwork</h4>
+          <p>Collaborating with diverse teams on projects</p>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h4>Innovation</h4>
+          <p>Creating innovative solutions for real problems</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Home Button -->
+    <div class="back-to-home">
+      <a href="/" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Back to Portfolio
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+// Add animation on scroll
+document.addEventListener('DOMContentLoaded', function() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all activity and event cards
+  document.querySelectorAll('.activity-card, .event-card, .community-card, .skill-item').forEach(card => {
+    observer.observe(card);
+  });
+
+  // Add hover effects
+  document.querySelectorAll('.activity-card, .event-card, .community-card, .skill-item').forEach(item => {
+    item.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-5px) scale(1.02)';
+    });
+    
+    item.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0) scale(1)';
+    });
+  });
+});
+</script>
+
+<%- include('partials/footer') %> 
