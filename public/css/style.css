@@ -30,8 +30,9 @@ body {
 .main-container {
     max-width: 1200px;
     display: flex;
+    
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 20px;
 }
 .right-image {
     flex: 1;
@@ -940,7 +941,7 @@ footer p {
 
 .achievement-details {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   align-items: center;
   margin-top: auto;
 }

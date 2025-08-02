@@ -307,3 +307,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initial update after 2 seconds
   setTimeout(updateVisitorCount, 1000);
 });
+
+// Disable right-click context menu
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
