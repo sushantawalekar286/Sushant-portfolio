@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import { FaUserLock, FaUser, FaLock } from 'react-icons/fa';
@@ -87,12 +87,6 @@ const Login = () => {
             >
               {isLoading ? 'Signing In...' : 'Sign In'}
             </CustomButton>
-          </div>
-
-          <div className="text-center mt-4">
-            <Link to="/admin/register" className="text-xs text-primary-500 hover:underline">
-              Temporary Register Account Link
-            </Link>
           </div>
 
         </form>

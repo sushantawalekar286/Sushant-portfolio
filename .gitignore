@@ -1,3 +1,5 @@
 node_modules/
 models/admin.js
-
+.env
+.env.*
+*.env
