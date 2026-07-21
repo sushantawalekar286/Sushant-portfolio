@@ -127,18 +127,18 @@ const CodingProfiles = () => {
               </div>
 
               {/* Stats values */}
-              <div className="grid grid-cols-3 gap-4 py-4">
-                <div className="text-center bg-slate-50/50 dark:bg-dark-950/40 p-3 rounded-xl border border-slate-100 dark:border-slate-850">
-                  <p className="text-2xl font-black text-slate-800 dark:text-white">{gitStats.repos}</p>
-                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Repositories</p>
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 py-4">
+                <div className="text-center bg-slate-50/50 dark:bg-dark-950/40 p-2 sm:p-3 rounded-xl border border-slate-100 dark:border-slate-850">
+                  <p className="text-xl sm:text-2xl font-black text-slate-800 dark:text-white">{gitStats.repos}</p>
+                  <p className="text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Repositories</p>
                 </div>
-                <div className="text-center bg-slate-50/50 dark:bg-dark-950/40 p-3 rounded-xl border border-slate-100 dark:border-slate-850">
-                  <p className="text-2xl font-black text-slate-800 dark:text-white">{gitStats.followers}</p>
-                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Followers</p>
+                <div className="text-center bg-slate-50/50 dark:bg-dark-950/40 p-2 sm:p-3 rounded-xl border border-slate-100 dark:border-slate-850">
+                  <p className="text-xl sm:text-2xl font-black text-slate-800 dark:text-white">{gitStats.followers}</p>
+                  <p className="text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Followers</p>
                 </div>
-                <div className="text-center bg-slate-50/50 dark:bg-dark-950/40 p-3 rounded-xl border border-slate-100 dark:border-slate-850">
-                  <p className="text-2xl font-black text-slate-800 dark:text-white">{gitStats.gists}</p>
-                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Gists</p>
+                <div className="text-center bg-slate-50/50 dark:bg-dark-950/40 p-2 sm:p-3 rounded-xl border border-slate-100 dark:border-slate-850">
+                  <p className="text-xl sm:text-2xl font-black text-slate-800 dark:text-white">{gitStats.gists}</p>
+                  <p className="text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Gists</p>
                 </div>
               </div>
             </div>
@@ -178,7 +178,7 @@ const CodingProfiles = () => {
               ) : (
                 <>
                   {/* Total solved details */}
-                  <div className="flex items-center gap-6">
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
                     <div className="relative w-20 h-20 flex items-center justify-center shrink-0">
                       <svg className="w-full h-full transform -rotate-90">
                         <circle cx="40" cy="40" r="32" className="stroke-slate-200 dark:stroke-dark-800 fill-none" strokeWidth="6" />
@@ -200,7 +200,7 @@ const CodingProfiles = () => {
                     </div>
 
                     {/* Categories break-down */}
-                    <div className="flex-1 space-y-1.5 text-[10px] font-bold">
+                    <div className="w-full sm:flex-1 space-y-1.5 text-[10px] font-bold">
                       <div className="flex justify-between items-center text-emerald-500">
                         <span>Easy: {leetStats.easySolved}</span>
                         <span>{easyPct}%</span>

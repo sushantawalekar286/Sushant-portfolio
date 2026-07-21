@@ -149,7 +149,7 @@ const About = () => {
         </div>
 
         {/* Numeric stats section */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-20">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 mt-16 sm:mt-20">
           {statsItems.map((item, index) => (
             <motion.div
               key={item.label}
@@ -157,14 +157,14 @@ const About = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-panel p-6 rounded-2xl text-center shadow-lg border border-white/20 dark:border-slate-800/40 relative group overflow-hidden"
+              className="glass-panel p-4 sm:p-6 rounded-2xl text-center shadow-lg border border-white/20 dark:border-slate-800/40 relative group overflow-hidden"
             >
               {/* Soft underlying hover radial glow */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              <h4 className="text-3xl sm:text-4xl font-black text-gradient">
+              <h4 className="text-2xl sm:text-4xl font-black text-gradient">
                 {item.value}+
               </h4>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">
+              <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1.5">
                 {item.label}
               </p>
             </motion.div>

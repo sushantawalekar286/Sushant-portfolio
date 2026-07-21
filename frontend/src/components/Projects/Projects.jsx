@@ -316,7 +316,7 @@ const Projects = () => {
 
             {/* Modal Container */}
             <motion.div
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-2xl z-50 bg-white dark:bg-dark-900 border border-white/20 dark:border-slate-800/80 rounded-3xl overflow-hidden shadow-2xl max-h-[85vh] flex flex-col"
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[94%] max-w-2xl z-50 bg-white dark:bg-dark-900 border border-white/20 dark:border-slate-800/80 rounded-3xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
               initial={{ opacity: 0, scale: 0.9, y: '-40%', x: '-50%' }}
               animate={{ opacity: 1, scale: 1, y: '-50%', x: '-50%' }}
               exit={{ opacity: 0, scale: 0.9, y: '-40%', x: '-50%' }}

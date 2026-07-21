@@ -42,7 +42,7 @@ const PublicLayout = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-dark-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className="relative min-h-screen w-full max-w-full overflow-x-hidden bg-slate-50 dark:bg-dark-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       {/* Scroll Progress Bar */}
       <motion.div 
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 to-purple-600 z-50 origin-left"
@@ -50,9 +50,9 @@ const PublicLayout = () => {
       />
 
       {/* Floating Glowing Dots for modern aesthetic */}
-      <div className="glow-dot-primary w-[300px] h-[300px] top-20 left-10" />
-      <div className="glow-dot-secondary w-[400px] h-[400px] top-[600px] right-20" />
-      <div className="glow-dot-primary w-[350px] h-[350px] bottom-40 left-[20%]" />
+      <div className="glow-dot-primary w-[250px] sm:w-[300px] h-[250px] sm:h-[300px] top-20 left-0 sm:left-10 pointer-events-none opacity-60" />
+      <div className="glow-dot-secondary w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] top-[600px] right-0 sm:right-10 pointer-events-none opacity-60" />
+      <div className="glow-dot-primary w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] bottom-40 left-0 sm:left-[20%] pointer-events-none opacity-60" />
 
       {/* Navigation Header */}
       <Navbar />

@@ -124,28 +124,28 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-x-0 top-[70px] bottom-0 bg-white/95 dark:bg-dark-950/95 backdrop-blur-md z-30 flex flex-col items-center justify-center p-8 gap-8 border-t border-slate-200/50 dark:border-slate-800/40 md:hidden"
+            className="fixed inset-x-0 top-[65px] bottom-0 bg-white/95 dark:bg-dark-950/95 backdrop-blur-md z-30 flex flex-col items-center justify-start py-8 px-6 gap-6 border-t border-slate-200/50 dark:border-slate-800/40 md:hidden overflow-y-auto"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
           >
-            <nav className="flex flex-col items-center gap-6">
+            <nav className="flex flex-col items-center gap-5 w-full">
               {navLinks.map((link) => (
                 <button
                   key={link.label}
                   onClick={() => handleScrollTo(link.target)}
-                  className="text-lg font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100 hover:text-primary-500"
+                  className="text-base font-bold uppercase tracking-widest text-slate-800 dark:text-slate-100 hover:text-primary-500 py-1"
                 >
                   {link.label}
                 </button>
               ))}
             </nav>
-            <div className="w-full h-px bg-slate-200 dark:bg-slate-800/60 max-w-xs" />
+            <div className="w-full h-px bg-slate-200 dark:bg-slate-800/60 max-w-xs my-2" />
             <Link
               to="/admin"
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-850 hover:bg-slate-50 text-sm font-semibold"
+              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-dark-900 text-sm font-semibold w-full max-w-xs"
             >
               <FaUserLock />
               Admin Portal

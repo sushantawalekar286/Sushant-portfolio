@@ -3,17 +3,31 @@
 @tailwind utilities;
 
 @layer base {
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden !important;
+    position: relative;
+    width: 100%;
+  }
+
   html {
     scroll-behavior: smooth;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
   
   body {
-    @apply bg-slate-50 text-slate-900 transition-colors duration-300 overflow-x-hidden;
+    @apply bg-slate-50 text-slate-900 transition-colors duration-300;
   }
   
   body.dark {
     @apply bg-dark-950 text-slate-100;
+  }
+
+  #root {
+    max-width: 100vw;
+    overflow-x: hidden !important;
+    width: 100%;
+    position: relative;
   }
 }
 

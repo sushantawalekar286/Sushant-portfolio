@@ -129,9 +129,9 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-slate-800 dark:text-white"
+          className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight text-slate-800 dark:text-white px-2"
         >
-          <span className="text-gradient leading-none">{heroData.name}</span>
+          <span className="text-gradient leading-tight">{heroData.name}</span>
         </motion.h1>
 
         {/* Dynamic Typing Title */}
@@ -139,9 +139,9 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="h-10 sm:h-14 mt-4 flex items-center justify-center"
+          className="h-12 sm:h-14 mt-4 flex items-center justify-center px-2 text-center"
         >
-          <h2 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-slate-600 dark:text-slate-300">
+          <h2 className="text-base sm:text-2xl md:text-3xl font-extrabold text-slate-600 dark:text-slate-300">
             I am a <span className="text-primary-500 font-mono">{displayText}</span>
             <span className="animate-pulse text-primary-500 font-normal">|</span>
           </h2>
@@ -152,7 +152,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6 text-sm sm:text-base md:text-lg max-w-2xl text-slate-500 dark:text-slate-400 leading-relaxed font-medium"
+          className="mt-6 text-xs sm:text-base md:text-lg max-w-2xl text-slate-500 dark:text-slate-400 leading-relaxed font-medium px-4"
         >
           {heroData.mainText}
         </motion.p>
@@ -162,13 +162,14 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-10 flex flex-wrap gap-4 justify-center"
+          className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full max-w-xs sm:max-w-none"
         >
           <CustomButton 
             variant="primary" 
             size="lg"
             icon={<FaTelegramPlane />}
             onClick={() => handleScrollTo('contact')}
+            className="w-full sm:w-auto"
           >
             Hire Me
           </CustomButton>
@@ -180,11 +181,13 @@ const Hero = () => {
               rel="noopener noreferrer"
               download
               onClick={handleResumeDownload}
+              className="w-full sm:w-auto"
             >
               <CustomButton 
                 variant="secondary" 
                 size="lg"
                 icon={<FaDownload />}
+                className="w-full sm:w-auto"
               >
                 Download Resume
               </CustomButton>
