@@ -222,3 +222,34 @@ export const resetPassword = async (req, res, next) => {
     next(error);
   }
 };
+
+// Temporary Admin Registration (will be removed after use)
+export const register = async (req, res, next) => {
+  const { username, email, password } = req.body;
+
+  if (!username || !email || !password) {
+    return sendError(res, 'All fields are required.', null, 400);
+  }
+
+  try {
+    const existing = await Admin.findOne({ $or: [{ username }, { email }] });
+    if (existing) {
+      return sendError(res, 'Admin account with this username or email already exists.', null, 400);
+    }
+
+    const admin = await Admin.create({
+      username,
+      email,
+      password,
+      role: 'superadmin'
+    });
+
+    return sendSuccess(res, 'Admin account created successfully!', {
+      username: admin.username,
+      email: admin.email
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+

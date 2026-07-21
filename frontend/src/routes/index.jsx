@@ -12,6 +12,7 @@ import Loader from '../components/Loader/Loader.jsx';
 const Home = lazy(() => import('../pages/Home.jsx'));
 const NotFound = lazy(() => import('../pages/NotFound.jsx'));
 const Login = lazy(() => import('../pages/Admin/Login.jsx'));
+const Register = lazy(() => import('../pages/Admin/Register.jsx'));
 
 // Admin Subpages
 const Dashboard = lazy(() => import('../pages/Admin/Dashboard.jsx'));
@@ -55,6 +56,14 @@ const router = createBrowserRouter([
     element: (
       <Suspense fallback={<Loader fullPage text="Opening Admin Login..." />}>
         <Login />
+      </Suspense>
+    )
+  },
+  {
+    path: '/admin/register',
+    element: (
+      <Suspense fallback={<Loader fullPage text="Opening Admin Register..." />}>
+        <Register />
       </Suspense>
     )
   },
