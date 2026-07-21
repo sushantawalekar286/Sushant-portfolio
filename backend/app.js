@@ -29,9 +29,22 @@ app.use(helmet());
 
 // 2. CORS configuration (allows credentials and cookies)
 const corsOptions = {
-  origin: process.env.FRONTEND_URL 
-    ? [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://127.0.0.1:5173']
-    : true, // fallback to reflect origin
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    
+    const allowed = ['http://localhost:5173', 'http://127.0.0.1:5173'];
+    if (process.env.FRONTEND_URL) {
+      allowed.push(process.env.FRONTEND_URL.trim());
+      allowed.push(process.env.FRONTEND_URL.trim().replace(/\/$/, ''));
+    }
+
+    if (allowed.includes(origin)) {
+      callback(null, true);
+    } else {
+      // In development or fallback cases
+      callback(null, true);
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
