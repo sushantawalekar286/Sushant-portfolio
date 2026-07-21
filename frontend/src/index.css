@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  
+  body {
+    @apply bg-slate-50 text-slate-900 transition-colors duration-300 overflow-x-hidden;
+  }
+  
+  body.dark {
+    @apply bg-dark-950 text-slate-100;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-dark-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-500/50 hover:bg-primary-500 rounded-full transition-colors;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  @apply bg-white/70 dark:bg-dark-900/60 backdrop-blur-md border border-white/20 dark:border-slate-800/50 shadow-xl;
+}
+
+.glass-card {
+  @apply bg-white/40 dark:bg-dark-900/40 backdrop-blur-md border border-white/20 dark:border-slate-800/40 transition-all duration-300 hover:shadow-primary-500/10 hover:border-primary-500/30;
+}
+
+.glass-nav {
+  @apply bg-white/60 dark:bg-dark-950/60 backdrop-blur-lg border-b border-white/10 dark:border-slate-800/30;
+}
+
+/* Text Gradient Utilities */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 via-purple-500 to-indigo-500;
+}
+
+.text-gradient-blue {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500;
+}
+
+/* Background Gradients & Effects */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+}
+
+/* Glow Dots */
+.glow-dot-primary {
+  @apply absolute rounded-full bg-primary-500/20 blur-[100px] pointer-events-none;
+}
+
+.glow-dot-secondary {
+  @apply absolute rounded-full bg-purple-500/20 blur-[100px] pointer-events-none;
+}
+
+/* Hide default cursor in desktop if custom cursor is enabled */
+.custom-cursor-active {
+  cursor: none;
+}
+
+.custom-cursor-active a, 
+.custom-cursor-active button,
+.custom-cursor-active input,
+.custom-cursor-active textarea,
+.custom-cursor-active select {
+  cursor: none;
+}
