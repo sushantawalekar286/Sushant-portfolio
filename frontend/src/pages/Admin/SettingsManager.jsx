@@ -3,12 +3,14 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { 
   FaCog, FaUser, FaLink, FaFilePdf, FaImage, FaPlus, 
-  FaTrash, FaCheck, FaExclamationTriangle, FaEdit, FaTimes 
+  FaTrash, FaCheck, FaExclamationTriangle, FaEdit, FaTimes,
+  FaLock
 } from 'react-icons/fa';
 import GlassCard from '../../components/GlassCard.jsx';
 import CustomButton from '../../components/CustomButton.jsx';
 import { Input, TextArea } from '../../components/Input.jsx';
 import axiosInstance from '../../api/axiosInstance.js';
+import { useAuthStore } from '../../store/useAuthStore.js';
 
 const SettingsManager = () => {
   const [activeTab, setActiveTab] = useState('hero');
@@ -27,10 +29,70 @@ const SettingsManager = () => {
   const [isSocialModalOpen, setIsSocialModalOpen] = useState(false);
   const [editingSocial, setEditingSocial] = useState(null);
 
+  const { user, updateProfileState } = useAuthStore();
+
   // Forms
   const { register: regHero, handleSubmit: subHero, reset: resHero } = useForm();
   const { register: regAbout, handleSubmit: subAbout, reset: resAbout } = useForm();
   const { register: regSocial, handleSubmit: subSocial, reset: resSocial } = useForm();
+  const { register: regSecurity, handleSubmit: subSecurity, reset: resSecurity } = useForm();
+
+  // Load profile data into form
+  useEffect(() => {
+    if (user) {
+      resSecurity({
+        username: user.username,
+        email: user.email,
+        currentPassword: '',
+        newPassword: '',
+        confirmNewPassword: ''
+      });
+    }
+  }, [user, resSecurity]);
+
+  const onSecuritySubmit = async (data) => {
+    if (data.newPassword && data.newPassword !== data.confirmNewPassword) {
+      return toast.error('New passwords do not match!');
+    }
+    if (data.newPassword && data.newPassword.length < 6) {
+      return toast.error('New password must be at least 6 characters long!');
+    }
+    if (data.newPassword && !data.currentPassword) {
+      return toast.error('Current password is required to change password.');
+    }
+
+    setLoading(true);
+    try {
+      const updateData = {
+        username: data.username,
+        email: data.email
+      };
+      if (data.newPassword) {
+        updateData.currentPassword = data.currentPassword;
+        updateData.newPassword = data.newPassword;
+      }
+
+      const res = await axiosInstance.put('/auth/profile', updateData);
+      if (res.data?.success) {
+        toast.success('Admin profile credentials updated successfully!');
+        updateProfileState({
+          username: res.data.data.username,
+          email: res.data.data.email
+        });
+        resSecurity({
+          username: res.data.data.username,
+          email: res.data.data.email,
+          currentPassword: '',
+          newPassword: '',
+          confirmNewPassword: ''
+        });
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to update admin profile.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Load configs
   const loadHeroConfig = async () => {
@@ -262,7 +324,8 @@ const SettingsManager = () => {
           { id: 'hero', label: 'Hero Section', icon: <FaCog /> },
           { id: 'about', label: 'About & Stats', icon: <FaUser /> },
           { id: 'socials', label: 'Social Networks', icon: <FaLink /> },
-          { id: 'resumes', label: 'Resumes Manager', icon: <FaFilePdf /> }
+          { id: 'resumes', label: 'Resumes Manager', icon: <FaFilePdf /> },
+          { id: 'security', label: 'Security & Profile', icon: <FaLock /> }
         ].map((tab) => (
           <button
             key={tab.id}
@@ -516,6 +579,34 @@ const SettingsManager = () => {
             </div>
 
           </div>
+        )}
+
+        {activeTab === 'security' && (
+          <GlassCard hoverEffect={false} className="p-6 md:p-8">
+            <form onSubmit={subSecurity(onSecuritySubmit)} className="space-y-6">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400">Security & Credentials</h3>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <Input label="Admin Username" {...regSecurity('username', { required: 'Username is required' })} />
+                <Input label="Admin Email" type="email" {...regSecurity('email', { required: 'Email is required' })} />
+              </div>
+
+              <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-6">
+                Change Password (optional)
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                <Input label="Current Password" type="password" placeholder="••••••••" {...regSecurity('currentPassword')} />
+                <Input label="New Password" type="password" placeholder="••••••••" {...regSecurity('newPassword')} />
+                <Input label="Confirm New Password" type="password" placeholder="••••••••" {...regSecurity('confirmNewPassword')} />
+              </div>
+
+              <div className="pt-6 border-t border-slate-100 dark:border-slate-850 flex justify-end">
+                <CustomButton type="submit" variant="primary" disabled={loading}>
+                  {loading ? 'Saving...' : 'Update Credentials'}
+                </CustomButton>
+              </div>
+            </form>
+          </GlassCard>
         )}
       </div>
 
